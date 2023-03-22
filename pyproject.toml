@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "hmxlabs.sysinfo"
-version = "1.0.3"
+version = "1.0.5"
 authors = [
   { name="HMx Labs", email="comms@hmxlabs.uk" }
 ]
@@ -19,8 +19,8 @@ classifiers = [
     "Intended Audience :: Developers"
 ]
 dependencies = [
-    "psutil < 5.9.4",
-    "py-cpuinfo < 9.0.0"
+    "psutil ~= 5.9",
+    "py-cpuinfo == 9.0.0"
 ]
 [project.scripts]
 sysinfo = "sysinfo:main"
