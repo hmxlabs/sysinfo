@@ -21,6 +21,7 @@ def main():
 
 
     results = {
+        "arch": arch,
         "core_count": core_count,
         "cpu_count": cpu_count,
         "cpu_vendor": cpu_vendor,
