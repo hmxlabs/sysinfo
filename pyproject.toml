@@ -4,11 +4,11 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "hmxlabs.sysinfo"
-version = "0.0.2"
+version = "1.0.1"
 authors = [
   { name="HMx Labs", email="comms@hmxlabs.uk" }
 ]
-description = "Package to get basic system information including CPU count, HT/SMT status, RAM and disk size"
+description = "Package to get basic system information including CPU count, HT/SMT status, RAM and disk. Not doing anything special. Just uses psutil and py-cpuinfo"
 readme = "README.md"
 requires-python = ">=3.10"
 classifiers = [
