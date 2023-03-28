@@ -95,6 +95,13 @@ def get_sysinfo() -> dict:
     cpu_f = psutil.cpu_freq(percpu=False)
     cpu_freq = get_clock_speed(KEY_CLOCK_SPEED, cpu_info)
     cpu_freq_act = get_clock_speed(KEY_CLOCK_SPEED_ACTUAL, cpu_info)
+    cpu_freq_min = 0
+    cpu_freq_max = 0
+    if hasattr(cpu_f, "min"):
+        cpu_freq_min = cpu_f.min
+
+    if hasattr(cpu_f, "max"):
+        cpu_freq_max = cpu_f.max
 
     disks = get_diskinfo()
 
@@ -108,8 +115,8 @@ def get_sysinfo() -> dict:
         "cpu_model": cpu_info["brand_raw"],
         "cpu_frequency": cpu_freq,
         "cpu_frequency_actual": cpu_freq_act,
-        "cpu_freq_min": cpu_f.min,
-        "cpu_freq_max": cpu_f.max,
+        "cpu_freq_min": cpu_freq_min,
+        "cpu_freq_max": cpu_freq_max,
         "installed_memory":  mem.total,
         "l3_cache_size": get_cache_size("l3_cache_size", cpu_info),
         "l2_cache_size": get_cache_size("l2_cache_size", cpu_info),
