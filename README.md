@@ -3,6 +3,10 @@ Platform / OS agnostic (hopefully!) way to get basic information such as disk si
 
 Really nothing clever, just uses psutil and py-cpuinfo under the cover but fairly handy for some of our use cases
 
+Install by running
+
+    python3 -m pip install --upgrade hmxlabs.sysinfo
+
 Can be run from the command line as
 
     python3 -m hmxlabs.sysinfo [--file] [--filename]
