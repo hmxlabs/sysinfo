@@ -5,6 +5,8 @@ import json
 import argparse
 from cpuinfo import get_cpu_info
 
+KEY_CLOCK_SPEED = "hz_advertised"
+KEY_CLOCK_SPEED_ACTUAL = "hz_actual"
 
 def get_diskinfo():
     disks = psutil.disk_partitions(all=False)
@@ -24,6 +26,15 @@ def get_diskinfo():
 
     return results
 
+def get_clock_speed(key: str, cpu_info):
+    """Gets the clock speeds from the CPU Info object. For some reason on ARM platforms this isn't
+    available and so needs to be accounted for"""
+    
+    if key not in cpu_info:
+        return 0
+    
+    return cpu_info[key][0]
+
 
 def get_sysinfo() -> dict:
     cpu_count = os.cpu_count()
@@ -33,8 +44,9 @@ def get_sysinfo() -> dict:
     mem = psutil.virtual_memory()
     arch = cpu_info["arch"]
     cpu_f = psutil.cpu_freq(percpu=False)
-    cpu_freq = cpu_info["hz_advertised"][0]
-    cpu_freq_act = cpu_info["hz_actual"][0]
+    cpu_freq = get_clock_speed(KEY_CLOCK_SPEED, cpu_info)
+    cpu_freq_act = get_clock_speed(KEY_CLOCK_SPEED_ACTUAL, cpu_info)
+
     disks = get_diskinfo()
 
 
