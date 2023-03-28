@@ -91,7 +91,6 @@ def get_sysinfo() -> dict:
     core_count = psutil.cpu_count(logical=False)  # This will get the number of physical CPUs regardless of whether HT/ SMT is enabled or not
     smt_on = cpu_count > core_count
     mem = psutil.virtual_memory()
-    arch = cpu_info["arch"]
     cpu_f = psutil.cpu_freq(percpu=False)
     cpu_freq = get_clock_speed(KEY_CLOCK_SPEED, cpu_info)
     cpu_freq_act = get_clock_speed(KEY_CLOCK_SPEED_ACTUAL, cpu_info)
@@ -107,12 +106,12 @@ def get_sysinfo() -> dict:
 
 
     results = {
-        "arch": arch,
+        "arch": cpu_info.get("arch", "unknown"),
         "smt_on": smt_on,
         "core_count": core_count,
         "cpu_count": cpu_count,
-        "cpu_vendor":  cpu_info["vendor_id_raw"],
-        "cpu_model": cpu_info["brand_raw"],
+        "cpu_vendor":  cpu_info.get("vendor_id_raw", "unknown"),
+        "cpu_model": cpu_info.get("brand_raw", "unknown"),
         "cpu_frequency": cpu_freq,
         "cpu_frequency_actual": cpu_freq_act,
         "cpu_freq_min": cpu_freq_min,
@@ -124,7 +123,7 @@ def get_sysinfo() -> dict:
         "l1_instruction_cache_size": get_cache_size("l1_instruction_cache_size", cpu_info),
         "l2_cache_line_size": get_cache_size("l2_cache_line_size", cpu_info),
         "l2_cache_associativity": get_cache_size("l2_cache_associativity", cpu_info),
-        "cpu_flags": cpu_info["flags"],
+        "cpu_flags": cpu_info.get("flags", []),
         "disks": disks
     }
 
