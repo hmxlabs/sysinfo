@@ -22,12 +22,13 @@ dependencies = [
     "psutil ~= 6.1.1",
     "py-cpuinfo == 9.0.0"
 ]
-[project.scripts]
-sysinfo = "sysinfo:main"
 
-[project.entry-points."hmxlabs.sysinfo"]
+[project.scripts]
 sysinfo = "hmxlabs.sysinfo.sysinfo:main"
 
 [project.urls]
 "Homepage" = "https://github.com/hmxlabs/sysinfo/"
 "HMxLabs" = "http://hmxlabs.uk"
+
+[tool.setuptools.packages.find]
+where = ["src"]
